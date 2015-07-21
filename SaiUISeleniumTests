@@ -1,0 +1,64 @@
+package com.test;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.support.ui.Select;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class SeleniumTest {
+	private static FirefoxDriver driver;
+	WebElement element;
+
+	@BeforeClass
+	public static void openBrowser(){
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	} 
+
+	@Test
+	public void story1(){
+
+		System.out.println("Starting test " + new Object(){}.getClass().getEnclosingMethod().getName());
+		driver.get("https://potus-ui.herokuapp.com/");	
+		driver.findElement(By.xpath("//*[@id='navigation']/div[2]/a")).click();
+		Select droplist = new Select(driver.findElement(By.id("year")));   
+		droplist.selectByVisibleText("1789");
+
+		List<WebElement> allElements = driver.findElements(By.xpath("//*[@id='presidents']/li/ul")); 
+		boolean result = false;
+		for (WebElement element: allElements) {
+			if(element.getText().contains("1789"))
+				result = true;
+		}
+		Assert.assertEquals("George Washington",driver.findElement(By.xpath("//*[@id='presidents']/li/a/strong")).getText());
+		if(!(driver.findElement(By.xpath("//*[@id='presidents']/li/span/em")).getText().length()!=0))
+			result = false;
+		Assert.assertTrue(result);
+		System.out.println("Ending test " + new Object(){}.getClass().getEnclosingMethod().getName());
+	}
+
+	@Test
+	public void story2(){
+
+		System.out.println("Starting test " + new Object(){}.getClass().getEnclosingMethod().getName());
+		driver.get("https://potus-ui.herokuapp.com/");	
+		driver.findElement(By.xpath("//*[@id='navigation']/div[3]/a")).click();
+		driver.findElement(By.xpath("//*[@id='q']")).sendKeys("Bush");
+		driver.findElement(By.xpath("//*[@id='search-btn']")).click();
+		Assert.assertTrue(driver.findElement(By.xpath("//*[@id='presidents']/li[1]/a/strong")).getText().contains("Bush"));
+		Assert.assertTrue(driver.findElement(By.xpath("//*[@id='presidents']/li[2]/a/strong")).getText().contains("Bush"));
+		System.out.println("Ending test " + new Object(){}.getClass().getEnclosingMethod().getName());
+	}
+
+	@AfterClass
+	public static void closeBrowser(){
+		driver.quit();
+	}
+}
