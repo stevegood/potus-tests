@@ -1,0 +1,96 @@
+package com.herokuapp.potus
+
+import geb.spock.GebReportingSpec
+
+class PresidentsSpec extends GebReportingSpec {
+
+  API api
+
+  def setup() {
+    api = new API()
+  }
+
+  def "Should test that API returns a list of presidents and the UI displays them"() {
+    when:
+    to IndexPage
+
+    then:
+    at IndexPage
+
+    when:
+    def apiPresidents = api.listPresidents()
+
+    then:
+    apiPresidents.each { president ->
+      def uiPresident = $("a[href='/president/$president._id']")
+      assert uiPresident
+      assert president.name == uiPresident.text()
+    }
+  }
+  
+  def "Should test that API returns president details by year and UI displays them"() {
+  
+   when:
+    to IndexPage
+
+    then:
+    at IndexPage
+    
+  when:
+    def apiPresidentByYear = api.getPresidentByYear(1793)
+  
+  then:
+    def uiPresident = $("a[href='president/$apiPresidentByYear._id")
+    assert apiPresidentByYear.name == uiPresident.text
+    assert apiPresidentByYear.party == uiPresident.party
+    assert apiPresidentByYear.years.length == uiPresident.years.length
+  }
+  
+  
+  def "Should test that API returns president details by name and UI displays them"() {
+  
+   when:
+    to IndexPage
+
+    then:
+    at IndexPage
+    
+  when:
+    def apiPresidentByYear = api.getPresidentByName("George")
+  
+  then:
+    apiPresidents.each { president ->
+    def uiPresident = $("a[href='president/$apiPresidentByYear._id")
+    assert apiPresidentByYear.name == uiPresident.text
+    assert apiPresidentByYear.party == uiPresident.party
+    assert apiPresidentByYear.years.length == uiPresident.years.length
+    }
+  }
+
+
+
+
+
+
+  /*--  def "first result for  search "() {
+        given:
+        to  { $('a[href="/search-by-year"]') }
+
+ 
+        expect:
+        at  { $('a[href="/search-by-year"]') }
+ 
+        when:
+             search.field.value("george") 
+                        
+        then:
+        assert $("div", 0, id: "content")
+ 
+        when:
+        firstResultLink.click()
+ 
+        then:
+        waitFor { at WikipediaPage }
+    } --*/
+
+
