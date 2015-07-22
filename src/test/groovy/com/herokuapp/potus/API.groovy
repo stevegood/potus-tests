@@ -28,7 +28,7 @@ class API {
   /*
     This Service will get the PresidentInfo based on the Name
   */
-    def getPresidentInfoByYear(String name) {
+    def getPresidentInfoByName(String name) {
     def res = http.get(
       path: "/presidents/name-like/$name"
     )
