@@ -62,7 +62,7 @@ class PresidentsSpec extends GebReportingSpec {
     to SearchByNamePage
     searchname = "Bush"
     submitButton.Click()
-
+ 
     then:
     at IndexPage
     def presidentInfo = api.getPresidentInfoByName("Bush")
