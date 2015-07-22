@@ -6,7 +6,7 @@ class SearchByYearPage extends Page {
   static url = 'search-by-year.html'
 
   static at = {
-    title == Presidents of the United States'
+    title == 'Presidents of the United States'
   }
 
   static content = {
