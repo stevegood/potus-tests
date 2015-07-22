@@ -28,7 +28,7 @@ class PresidentsSpec extends GebReportingSpec {
     }
   }
 
-  def "Should test that API returns President Info(Name,Party) and the UI displays them based on the selection of the year"() {
+  def "Should test that API returns President Info Name,Party and the UI displays them based on the selection of the year"() {
     when:
     to SearchByYearPage
     selectYear = '2002'
@@ -43,7 +43,7 @@ class PresidentsSpec extends GebReportingSpec {
       assert presidentInfo.party == uiPresident.party
   }
 
-  def "Should test that API returns President Info(Name,Party) and the UI displays them based on search for First or Last name"() {
+  def "Should test that API returns President Info Name and the UI displays them based on search for First or Last name"() {
     when:
     to SearchByNamePage
     searchname = "Abraham"
