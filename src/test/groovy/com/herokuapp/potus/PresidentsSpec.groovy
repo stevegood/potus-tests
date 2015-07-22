@@ -57,7 +57,7 @@ class PresidentsSpec extends GebReportingSpec {
       assert presidentInfo.name == uiPresident.text()
   }
   
-  def "Should test that API returns Many President Info(Name,Party) and the UI displays them based on search for First or Last name"() {
+  def "Should test that API returns Many President Info Name and the UI displays them based on search for First or Last name"() {
     when:
     to SearchByNamePage
     searchname = "Bush"
@@ -72,7 +72,7 @@ class PresidentsSpec extends GebReportingSpec {
       assert presidentInfo.size() == 2
   }
 
-  def "Should test that API returns NO President Info(Name,Party) and the UI displays No Data  based on search for incorrect First or Last name"() {
+  def "Should test that API returns NO President Info Name,Party and the UI displays No Data  based on search for incorrect First or Last name"() {
     when:
     to SearchByNamePage
     searchname = "XYZ"
