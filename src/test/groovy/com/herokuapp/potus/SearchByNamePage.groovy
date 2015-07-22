@@ -11,7 +11,7 @@ class SearchByNamePage extends Page {
 
   static content = {
     searchByNameForm {$("#search-name-form")}
-    selectyear {searchByNameForm.selectyear}
+    searchname {searchByNameForm.searchname}
     submitButton(to: IndexPage) {
     searchByNameForm.find("input",type: "submit")
     }
