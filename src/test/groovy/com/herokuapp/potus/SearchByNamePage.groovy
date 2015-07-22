@@ -15,5 +15,9 @@ class SearchByNamePage extends Page {
     submitButton(to: IndexPage) {
     searchByNameForm.find("input",type: "submit")
     }
+    errors(required:false) { $(".errors li") }
+    NoDataFoundError(required:false) {
+    errors.filter(text:contains("No Data Found"))
+    }
   }
 }
