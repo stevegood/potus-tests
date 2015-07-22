@@ -6,7 +6,7 @@ class SearchByNamePage extends Page {
   static url = 'search-by-name.html'
 
   static at = {
-    title == 'SearchByNamePage'
+    title == 'Presidents of the United States'
   }
 
   static content = {
