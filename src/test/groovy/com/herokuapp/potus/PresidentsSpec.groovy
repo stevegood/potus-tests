@@ -97,7 +97,5 @@ class PresidentsSpec extends GebReportingSpec {
 
     then:
     assert apiPresidentsPartiesMap.collect{it.value.size()}
-    assert apiPresidentsPartiesMap.Federalist.size() == 1
-    assert apiPresidentsPartiesMap.Democrat.size() == 14
   }  
 }
